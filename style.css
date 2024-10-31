@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap');
-
-/* Variáveis CSS */
+/* Variáveis de cores */
 :root {
     --text-color: #ffffff;
-    --card-front-color: #6451bb;
-    --card-back-color: #320083;
+    --card-background: #6451bb;
+    --button-background: #4a3b8e;
     --background-color: #6e57f0;
 }
 
@@ -15,6 +13,83 @@ body {
     color: #0a0a0a;
     margin: 0;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Container principal */
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+/* Estilo dos cartões de planeta */
+.card {
+    background-color: var(--card-background);
+    color: var(--text-color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Elevação ao passar o mouse */
+}
+
+.card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+/* Botões */
+.button-group {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button {
+    background-color: var(--button-background);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #382a6d;
+}
+
+/* Janela de pergunta inicial */
+#initial-question {
+    text-align: center;
+    background-color: #4a3b8e;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+}
+
+#initial-question h2 {
+    margin: 0 0 1rem;
+}
+
+#initial-question .button {
+    margin-top: 10px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
 }
 
 /* Footer */
@@ -25,84 +100,7 @@ footer {
     bottom: 0;
     width: 100%;
     height: 2rem;
-}
-
-footer p {
-    text-align: center;
-    font-size: 0.6rem;
-    margin: 0;
-    padding-top: 0.5rem;
-}
-
-/* Container */
-#container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-}
-
-/* Estilos do Cartão */
-.cartao {
-    margin: 1rem;
-    background-color: rgb(0, 89, 255);
-    height: 20rem;
-    width: 15rem; /* Definindo uma largura fixa */
-    perspective: 1000px;
-}
-
-.cartao__conteudo {
-    text-align: center;
-    height: 100%;
-    background-color: var(--card-front-color);
-    transform-style: preserve-3d;
-    transition: transform 300ms ease-in-out;
-    position: relative;
-}
-
-.cartao:hover .cartao__conteudo {
-    transform: rotateY(180deg);
-}
-
-/* Estilos do Título */
-.cartao__conteudo h3 {
-    color: var(--text-color);
-    background: rgb(101, 29, 235);
-    border: 1px solid var(--text-color);
-    text-align: left;
-    padding: 0.5rem;
-    position: absolute;
-    top: 0.6rem;
-    left: 0.6rem;
-    border-radius: 0.6rem;
-    font-size: 1vw;
-    backface-visibility: hidden;
-}
-
-/* Conteúdo da Pergunta e Resposta */
-.cartao__conteudo__pergunta,
-.cartao__conteudo__resposta {
-    backface-visibility: hidden;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
-.cartao__conteudo__pergunta p {
-    color: var(--text-color);
-    font-weight: 500;
-    padding: 2rem;
-    margin-top: 4rem;
-}
-
-.cartao__conteudo__resposta {
-    transform: rotateY(180deg);
-}
-
-.cartao__conteudo__resposta p {
-    color: var(--card-back-color);
-    font-weight: 700;
-    padding: 2rem;
-    margin-top: 4rem;
+    align-items: center;
 }

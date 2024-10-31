@@ -1,165 +1,143 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dicionário de Planetas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Variáveis CSS */
-        :root {
-            --text-color: #ffffff;
-            --card-front-color: #6451bb;
-            --card-back-color: #320083;
-            --background-color: #6e57f0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco de Dados dos Planetas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap">
+<style>
+    /* Variáveis de cores */
+    :root {
+        --text-color: #ffffff;
+        --card-background: #6451bb;
+        --button-background: #4a3b8e;
+        --background-color: #6e57f0;
+    }
 
-        /* Estilos Globais */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: #0a0a0a;
-            margin: 0;
-            padding: 20px;
-        }
+    /* Estilos Globais */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--background-color);
+        color: #0a0a0a;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-        footer {
-            background-color: black;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 2rem;
-        }
+    /* Container principal */
+    #container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        width: 100%;
+        max-width: 1200px;
+    }
 
-        footer p {
-            text-align: center;
-            font-size: 0.6rem;
-            margin: 0;
-            padding-top: 0.5rem;
-        }
+    /* Estilo dos cartões de planeta */
+    .card {
+        background-color: var(--card-background);
+        color: var(--text-color);
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
-        /* Container */
-        #container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    .card h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
 
-        /* Estilos do Cartão */
-        .cartao {
-            margin: 1rem;
-            background-color: rgb(0, 89, 255);
-            height: 20rem;
-            width: 15rem; /* Definindo uma largura fixa */
-            perspective: 1000px;
-        }
+    /* Botões */
+    .button-group {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
 
-        .cartao__conteudo {
-            text-align: center;
-            height: 100%;
-            background-color: var(--card-front-color);
-            transform-style: preserve-3d;
-            transition: transform 300ms ease-in-out;
-            position: relative;
-        }
+    .button {
+        background-color: var(--button-background);
+        color: var(--text-color);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-        .cartao:hover .cartao__conteudo {
-            transform: rotateY(180deg);
-        }
+    .button:hover {
+        background-color: #382a6d;
+    }
 
-        /* Estilos do Título */
-        .cartao__conteudo h3 {
-            color: var(--text-color);
-            background: rgb(101, 29, 235);
-            border: 1px solid var(--text-color);
-            text-align: left;
-            padding: 0.5rem;
-            position: absolute;
-            top: 0.6rem;
-            left: 0.6rem;
-            border-radius: 0.6rem;
-            font-size: 1vw;
-            backface-visibility: hidden;
-        }
-
-        /* Conteúdo da Pergunta e Resposta */
-        .cartao__conteudo__pergunta,
-        .cartao__conteudo__resposta {
-            backface-visibility: hidden;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-        }
-
-        .cartao__conteudo__pergunta p {
-            color: var(--text-color);
-            font-weight: 500;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .cartao__conteudo__resposta {
-            transform: rotateY(180deg);
-        }
-
-        .cartao__conteudo__resposta p {
-            color: var(--card-back-color);
-            font-weight: 700;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-    </style>
+    /* Footer */
+    footer {
+        background-color: black;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 </head>
 <body>
-    <div id="container">
-        <div class="cartao">
-            <div class="cartao__conteudo">
-                <h3>Planeta: Mercúrio</h3>
-                <div class="cartao__conteudo__pergunta">
-                    <p>Qual é o tamanho?</p>
-                </div>
-                <div class="cartao__conteudo__resposta">
-                    <p>Tamanho: 4879 km</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="cartao">
-            <div class="cartao__conteudo">
-                <h3>Planeta: Vênus</h3>
-                <div class="cartao__conteudo__pergunta">
-                    <p>Qual é o tamanho?</p>
-                </div>
-                <div class="cartao__conteudo__resposta">
-                    <p>Tamanho: 1204 km</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="cartao">
-            <div class="cartao__conteudo">
-                <h3>Planeta: Terra</h3>
-                <div class="cartao__conteudo__pergunta">
-                    <p>Qual é o tamanho?</p>
-                </div>
-                <div class="cartao__conteudo__resposta">
-                    <p>Tamanho: 12756 km</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Adicione mais cartões conforme necessário -->
+    <!-- Pergunta inicial -->
+    <div id="initial-question">
+        <h2>Gostaria de acessar o banco de dados dos planetas?</h2>
+        <button onclick="startApp('sim')" class="button">Sim</button>
+        <button onclick="startApp('nao')" class="button">Não</button>
     </div>
 
+    <!-- Container dos cartões de planeta -->
+    <div id="container" style="display: none;">
+        <div class="card">
+            <h3>Mercúrio</h3>
+            <p>Tamanho: 4879 km</p>
+            <p>Distância do Sol: 57.9 milhões km</p>
+            <p>Apelido: O Planeta de Fogo</p>
+            <div class="button-group">
+                <button class="button" onclick="editPlanet('Mercúrio')">Editar</button>
+                <button class="button" onclick="removePlanet('Mercúrio')">Remover</button>
+            </div>
+        </div>
+        <!-- Repita as divs .card para cada planeta -->
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>Obrigado por visitar!</p>
+        <p>Banco de Dados dos Planetas</p>
     </footer>
 
-    <script>
-        // Aqui você pode adicionar JavaScript para interatividade, se necessário
-    </script>
+<script>
+    // Função para exibir ou ocultar o conteúdo
+    function startApp(response) {
+        const initialQuestion = document.getElementById("initial-question");
+        const container = document.getElementById("container");
+
+        if (response === 'sim') {
+            initialQuestion.style.display = "none";
+            container.style.display = "grid"; // Exibe os cartões de planeta
+        } else {
+            alert('Obrigada por utilizar nosso programa!');
+        }
+    }
+
+    // Funções de exemplo para editar e remover planetas
+    function editPlanet(planetName) {
+        alert("Editar informações de " + planetName);
+    }
+
+    function removePlanet(planetName) {
+        alert("Remover " + planetName + " do banco de dados.");
+    }
+</script>
 </body>
 </html>
