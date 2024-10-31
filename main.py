@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-from crud import (adicionar_planetas, remover_planetas, listar_planetas, buscar_planetas, editar_planetas)
+from dados import adicionar_planetas, remover_planetas, listar_planetas, buscar_planetas, editar_planetas
 from planetas import planetas
+
 
 def adicionar():
     adicionar_planetas()
