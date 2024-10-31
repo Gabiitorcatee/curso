@@ -1,18 +1,35 @@
-from rich import print
-from rich.prompt import Prompt
-from rich.console import Console
-
-console = Console()
-
+from planetas import planetas
+#programa principal
 while True:
-    user_input = Prompt.ask('Digite um número ou digite "fim"')
-    if user_input.lower() == 'fim': 
-        print('[green]Obrigada por utilizar meu programa, espero que tenha gostado![/green]')
+    user_input = input('Gostaria de acessar o banco de dados dos planetas? "Sim" ou "Não": ')
+    if user_input.lower() == 'não': 
+        print('Obrigada por utilizar meu programa, espero que tenha gostado!')
         break
-    try:
-        number = int(user_input)
-        mostrarfatorial(number)
-        mostrarSomatorio(number, True)
-        mostrarSomatorio(number, False)
-    except ValueError:
-        print("[red]Por favor, insira um número válido.[/red]")
+    else:
+      print('\nDicionário de Planetas')
+      print('1. Adicionar planeta')
+      print('2. Remover planeta')
+      print('3. Lista planetas')
+      print('4. Buscar planetas')
+      print('5. Editar planeta')
+      print('fim. Sair')
+    
+    number = (user_input) # muda a entrada de dados para números
+    opcao = input('Digite a opção desejada: ')
+    
+    if opcao == '1':
+        adicionar_planetas()
+    elif opcao == '2':
+        remover_planetas()
+    elif opcao == '3':
+        listar_planetas()
+    elif opcao == '4':
+        buscar_planetas()
+    elif opcao == '5':
+        editar_planetas()
+    else:
+        print('Opção desejada não existe')
+            
+            
+
+
