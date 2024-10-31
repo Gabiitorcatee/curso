@@ -1,32 +1,36 @@
-#function that calculates a factorial of a number
+from rich import print
+from rich.prompt import Prompt
+
 def fatorial(number):
     result = 1
     for i in range(1, number + 1):
-        result = result * i
+        result *= i
     return result
-    
-#Function that show the factorial
+
 def mostrarfatorial(number):
-     print('O fatorial de {} é: {} '.format(number, fatorial(number)))
-    
-#function that calculates a sum of a number
+    print(f'[blue]O fatorial de {number} é: {fatorial(number)}[/blue]')
+
 def somatorio(number, pares):
-    result = 0 
-    inicio = 0 
-    if pares:
-        inicio = 0
-    else:
-        inicio = 1
+    result = 0
+    inicio = 0 if pares else 1
     for i in range(inicio, number + 1, 2):
-       result = result + i
+        result += i
     return result
-    
-#Function that show the Even
+
 def mostrarSomatorio(number, pares):
-    if pares:
-        print('Agora vamos fazer a somátoria dos números pares! ')
-        print('A soma dos pares é: {} '.format(somatorio(number, pares))) 
-        
-    else:
-        print('Agora vamos fazer a somátoria dos números ímpares! ')
-        print('A soma dos ímpares é: {} '.format(somatorio(number, pares))) 
+    tipo = "pares" if pares else "ímpares"
+    print(f'[green]A soma dos {tipo} até {number} é: {somatorio(number, pares)}[/green]')
+
+# Programa principal
+while True:
+    user_input = Prompt.ask('[bold]Digite um número ou digite "fim"[/bold]')
+    if user_input.lower() == 'fim': 
+        print('[red]Obrigada por utilizar meu programa![/red]')
+        break
+    try:
+        number = int(user_input)
+        mostrarfatorial(number)
+        mostrarSomatorio(number, True)
+        mostrarSomatorio(number, False)
+    except ValueError:
+        print("[red]Por favor, insira um número válido.[/red]")

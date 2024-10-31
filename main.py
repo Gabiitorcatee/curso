@@ -1,12 +1,18 @@
-from biblioteca import  mostrarfatorial, mostrarSomatorio
+from rich import print
+from rich.prompt import Prompt
+from rich.console import Console
 
-#main program
+console = Console()
+
 while True:
-    user_input = input('Digite um número ou digite "fim": ')
+    user_input = Prompt.ask('Digite um número ou digite "fim"')
     if user_input.lower() == 'fim': 
-        print('Obrigada por utilizar meu programa, espero que tenha gostado!')
+        print('[green]Obrigada por utilizar meu programa, espero que tenha gostado![/green]')
         break
-    number = int(user_input)
-    mostrarfatorial(number)
-    mostrarSomatorio(number, True)
-    mostrarSomatorio(number, False)
+    try:
+        number = int(user_input)
+        mostrarfatorial(number)
+        mostrarSomatorio(number, True)
+        mostrarSomatorio(number, False)
+    except ValueError:
+        print("[red]Por favor, insira um número válido.[/red]")
