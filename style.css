@@ -18,7 +18,32 @@ body {
     align-items: center;
 }
 
-/* Container principal */
+/* Tela inicial em tela cheia */
+#initial-question.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--button-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+}
+
+#initial-question h2 {
+    margin-bottom: 1rem;
+}
+
+#initial-question .button {
+    margin: 5px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Container de planetas */
 #container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -28,7 +53,7 @@ body {
     margin-top: 20px;
 }
 
-/* Estilo dos cartões de planeta */
+/* Cartões de planeta */
 .card {
     background-color: var(--card-background);
     color: var(--text-color);
@@ -43,7 +68,7 @@ body {
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Elevação ao passar o mouse */
+    transform: translateY(-5px);
 }
 
 .card h3 {
@@ -70,26 +95,6 @@ body {
 
 .button:hover {
     background-color: #382a6d;
-}
-
-/* Janela de pergunta inicial */
-#initial-question {
-    text-align: center;
-    background-color: #4a3b8e;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: var(--text-color);
-}
-
-#initial-question h2 {
-    margin: 0 0 1rem;
-}
-
-#initial-question .button {
-    margin-top: 10px;
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
 }
 
 /* Footer */

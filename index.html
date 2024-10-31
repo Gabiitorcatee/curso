@@ -1,143 +1,108 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banco de Dados dos Planetas</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap">
-<style>
-    /* Variáveis de cores */
-    :root {
-        --text-color: #ffffff;
-        --card-background: #6451bb;
-        --button-background: #4a3b8e;
-        --background-color: #6e57f0;
-    }
-
-    /* Estilos Globais */
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: var(--background-color);
-        color: #0a0a0a;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Container principal */
-    #container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
-        width: 100%;
-        max-width: 1200px;
-    }
-
-    /* Estilo dos cartões de planeta */
-    .card {
-        background-color: var(--card-background);
-        color: var(--text-color);
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .card h3 {
-        margin-top: 0;
-        font-size: 1.2rem;
-    }
-
-    /* Botões */
-    .button-group {
-        margin-top: 1rem;
-        display: flex;
-        gap: 0.5rem;
-    }
-
-    .button {
-        background-color: var(--button-background);
-        color: var(--text-color);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .button:hover {
-        background-color: #382a6d;
-    }
-
-    /* Footer */
-    footer {
-        background-color: black;
-        color: white;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Dados de Planetas</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Pergunta inicial -->
-    <div id="initial-question">
+
+    <!-- Pergunta Inicial -->
+    <div id="initial-question" class="fullscreen">
         <h2>Gostaria de acessar o banco de dados dos planetas?</h2>
-        <button onclick="startApp('sim')" class="button">Sim</button>
-        <button onclick="startApp('nao')" class="button">Não</button>
+        <button onclick="initializeApp(true)" class="button">Sim</button>
+        <button onclick="initializeApp(false)" class="button">Não</button>
     </div>
 
-    <!-- Container dos cartões de planeta -->
+    <!-- Container Principal -->
     <div id="container" style="display: none;">
-        <div class="card">
-            <h3>Mercúrio</h3>
-            <p>Tamanho: 4879 km</p>
-            <p>Distância do Sol: 57.9 milhões km</p>
-            <p>Apelido: O Planeta de Fogo</p>
-            <div class="button-group">
-                <button class="button" onclick="editPlanet('Mercúrio')">Editar</button>
-                <button class="button" onclick="removePlanet('Mercúrio')">Remover</button>
-            </div>
-        </div>
-        <!-- Repita as divs .card para cada planeta -->
+        <!-- Cartões de Planetas vão aparecer aqui -->
     </div>
+
+    <!-- Botão de Adicionar Planeta -->
+    <button onclick="addPlanetForm()" class="button" id="add-planet-btn" style="display: none; margin-top: 1rem;">Adicionar Planeta</button>
 
     <!-- Footer -->
     <footer>
-        <p>Banco de Dados dos Planetas</p>
+        <p>Banco de Dados de Planetas</p>
     </footer>
 
-<script>
-    // Função para exibir ou ocultar o conteúdo
-    function startApp(response) {
-        const initialQuestion = document.getElementById("initial-question");
-        const container = document.getElementById("container");
+    <!-- JavaScript -->
+    <script>
+        // Dados iniciais dos planetas
+        let planetas = {
+            'Mercúrio': { 'tamanho': 4879, 'distancia': 57.9, 'apelido': 'O Planeta de Fogo' },
+            'Vênus': { 'tamanho': 1204, 'distancia': 108.2, 'apelido': 'Estrela Dalva ou Vesper' },
+            'Terra': { 'tamanho': 12756, 'distancia': 149.6, 'apelido': 'O Planeta Azul' },
+            'Marte': { 'tamanho': 6792, 'distancia': 227.9, 'apelido': 'O Planeta Vermelho' }
+        };
 
-        if (response === 'sim') {
-            initialQuestion.style.display = "none";
-            container.style.display = "grid"; // Exibe os cartões de planeta
-        } else {
-            alert('Obrigada por utilizar nosso programa!');
+        // Função para inicializar o app
+        function initializeApp(accepted) {
+            document.getElementById('initial-question').style.display = 'none';
+            if (accepted) {
+                document.getElementById('container').style.display = 'grid';
+                document.getElementById('add-planet-btn').style.display = 'block';
+                renderPlanets();
+            }
         }
-    }
 
-    // Funções de exemplo para editar e remover planetas
-    function editPlanet(planetName) {
-        alert("Editar informações de " + planetName);
-    }
+        // Renderiza os planetas no container
+        function renderPlanets() {
+            const container = document.getElementById('container');
+            container.innerHTML = ''; // Limpa o conteúdo
+            for (let nome in planetas) {
+                const { tamanho, distancia, apelido } = planetas[nome];
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <h3>${nome}</h3>
+                    <p><strong>Tamanho:</strong> ${tamanho} km</p>
+                    <p><strong>Distância do Sol:</strong> ${distancia} milhões de km</p>
+                    <p><strong>Apelido:</strong> ${apelido}</p>
+                    <div class="button-group">
+                        <button onclick="editPlanetForm('${nome}')" class="button">Editar</button>
+                        <button onclick="removePlanet('${nome}')" class="button">Remover</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
+        }
 
-    function removePlanet(planetName) {
-        alert("Remover " + planetName + " do banco de dados.");
-    }
-</script>
+        // Função para remover um planeta
+        function removePlanet(nome) {
+            delete planetas[nome];
+            renderPlanets();
+        }
+
+        // Formulário para adicionar planeta
+        function addPlanetForm() {
+            const nome = prompt("Nome do Planeta:");
+            const tamanho = prompt("Tamanho do Planeta (km):");
+            const distancia = prompt("Distância do Sol (milhões de km):");
+            const apelido = prompt("Apelido do Planeta:");
+            if (nome && tamanho && distancia && apelido) {
+                planetas[nome] = { tamanho, distancia, apelido };
+                renderPlanets();
+            }
+        }
+
+        // Formulário para editar planeta
+        function editPlanetForm(nome) {
+            const planeta = planetas[nome];
+            const novoNome = prompt("Novo Nome do Planeta:", nome);
+            const novoTamanho = prompt("Novo Tamanho do Planeta (km):", planeta.tamanho);
+            const novaDistancia = prompt("Nova Distância do Sol (milhões de km):", planeta.distancia);
+            const novoApelido = prompt("Novo Apelido do Planeta:", planeta.apelido);
+
+            if (novoNome && novoTamanho && novaDistancia && novoApelido) {
+                delete planetas[nome];
+                planetas[novoNome] = { tamanho: novoTamanho, distancia: novaDistancia, apelido: novoApelido };
+                renderPlanets();
+            }
+        }
+    </script>
+
 </body>
 </html>
